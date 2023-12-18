@@ -1,0 +1,38 @@
+@charset "ISO-8859-1";
+
+/* style.css */
+
+/* Agrega estilos personalizados para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Agrega estilo para el icono de eliminación */
+.fa-bug {
+  color: #0d6efd;
+}
+
+/* Agrega estilos para la fila de total */
+.text-danger {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Agrega estilos para el botón "Volver" */
+.btn-success {
+  /* Tus estilos personalizados para el botón aquí */
+}
+
+/* Agrega cualquier estilo personalizado adicional que necesites */
