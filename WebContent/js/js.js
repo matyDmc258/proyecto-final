@@ -1,6 +1,4 @@
-
 function calcular() {
-
     // Precio original por entrada
     const PrecioOriginal = 200;
 
@@ -8,15 +6,13 @@ function calcular() {
     var cantidadDeEntradas = document.getElementById("Cantidad");
     var descuentoSelect = document.getElementById("selectDescuentos");
 
-
     // Obtener los valores seleccionados
     var cantidadEntradas = parseInt(cantidadDeEntradas.value);
     var descuento = parseInt(descuentoSelect.value);
 
-
     // Calcular el precio con descuento
-    var precioConDescuento = PrecioOriginal - (PrecioOriginal * (descuento / 100));
-
+	var precioConDescuento = PrecioOriginal - (PrecioOriginal * (descuento / 100));
+	
     // Calcular el precio total
     var precioTotal = cantidadEntradas * precioConDescuento;
 

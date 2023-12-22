@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="css/style.css">
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <title>backoffice</title>
 </head>
 <body>
@@ -14,6 +15,8 @@
 <%@page import="misclases.Tickets"%>
 <%@page import="misclases.TicketDAO"%>
 <%@page import="java.util.List"%>
+<%@page import="misclases.Categoria"%>
+
 
 
 <div class="container">
@@ -33,46 +36,37 @@
 			
 						
 			<%
-			List<Tickets> resultado=null;
-			TicketDAO ticket=new TicketDAO();
-			resultado=ticket.listarTickets();
-			int totalFacturado=0;
-			
-			for(int x=0;x<resultado.size();x++)
-			{
-				String rutaE="FrontController?accion=eliminar&id="+resultado.get(x).getId();
-				String tipoTicketTexto="";
-				
-				
-				if(resultado.get(x).getTipo_ticket()==1)
-				{
-					tipoTicketTexto="Estudiante";
-				}
-				else if (resultado.get(x).getTipo_ticket()==2)
-				{
-					tipoTicketTexto="Trainee";
-				}
-				else 
-				{
-					tipoTicketTexto="Junior";
-				}
-			%>
-			<tbody>
-			<tr>
-			
-				<td><%=resultado.get(x).getId()%></td>
-				<td><%=resultado.get(x).getNombre()%></td>
-				<td><%=resultado.get(x).getApellido()%></td>
-				<td><%=resultado.get(x).getMail()%></td>
-				<td><%=resultado.get(x).getCant()%></td>
-				<td><%=tipoTicketTexto%></td>
-				<td><%=resultado.get(x).getTotal_facturado()%></td>
-				<td class="text-center"><a href=<%=rutaE%>>*</a></td>
-				
-			</tr>	
-			
-			<%
-			totalFacturado+=resultado.get(x).getTotal_facturado();
+			List<Tickets> resultado = null;
+			TicketDAO ticket = new TicketDAO();
+			resultado = ticket.listarTickets();
+			int totalFacturado = 0;
+
+			for (int x = 0; x < resultado.size(); x++) {
+			    String rutaE = "FrontController?accion=eliminar&id=" + resultado.get(x).getId();
+			    String tipoTicketTexto = "";
+
+			    // Utilizar la enumeración Categoria para obtener el texto correspondiente
+			    Categoria categoria = Categoria.values()[resultado.get(x).getTipo_ticket()];
+			    tipoTicketTexto = categoria.name();
+
+			    %>
+			    <tbody>
+			    <tr>
+
+			        <td><%=resultado.get(x).getId() %></td>
+			        <td><%=resultado.get(x).getNombre() %></td>
+			        <td><%=resultado.get(x).getApellido() %></td>
+			        <td><%=resultado.get(x).getMail() %></td>
+			        <td><%=resultado.get(x).getCant() %></td>
+					<td><%=tipoTicketTexto.toLowerCase()%></td>
+			        <td><%=resultado.get(x).getTotal_facturado() %></td>
+			        <td class="text-center"><a href=<%=rutaE %>>*</a></td>
+
+			    </tr>
+
+			    <%
+			    totalFacturado += resultado.get(x).getTotal_facturado();
+
 			}
 			%>
 			

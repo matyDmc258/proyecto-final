@@ -60,37 +60,39 @@ public class FrontController extends HttpServlet {
 	            dispatcher = request.getRequestDispatcher("vistas/conferencia.jsp");
 	        } 
 	        
-	        else if (accion.equals("comprarTicket")) 
-	        {
-	        	String nombre=request.getParameter("nombre");
-				String apellido=request.getParameter("apellido");
-				String mail=request.getParameter("mail");			
-				int cant=Integer.parseInt(request.getParameter("cant"));			
-				int categoria=Integer.parseInt(request.getParameter("categoria"));
-				float total = 0;
-				
-				switch (categoria) {
-		        case 80:
-		            total = cant * 80.0f; //  Estudiante
-		            break;
-		        case 50:
-		            total = cant * 50.0f; //  Trainee
-		            break;
-		        case 15:
-		            total = cant * 15.0f; //  Junior
-		            break;
-		        default:
-		            
-		            break;
-		    }
+	        else if (accion.equals("comprarTicket")) {
+	            String nombre = request.getParameter("nombre");
+	            String apellido = request.getParameter("apellido");
+	            String mail = request.getParameter("mail");
+	            int cant = Integer.parseInt(request.getParameter("cant"));
+	            String categoriaSeleccionada = request.getParameter("categoria");
+	            Categoria categoria = Categoria.valueOf(categoriaSeleccionada.toUpperCase());
+
+	            // Obtener el valor de la categoría seleccionada
+	            float valorCategoria = categoria.getValor();
+
+	            // Calcular el descuento según la categoría
+	            float descuento = 0.0f;
+	            switch (categoria) {
+	                case ESTUDIANTE:
+	                    descuento = 0.8f; // 80%
+	                    break;
+	                case TRAINEE:
+	                    descuento = 0.5f; // 50%
+	                    break;
+	                case JUNIOR:
+	                    descuento = 0.15f; // 15%
+	                    break;
+	            }
+
+	            // Calcular el total con descuento
+	            float total = cant * valorCategoria * (1 - descuento);
+
+	            Tickets ticket = new Tickets(0, nombre, apellido, mail, cant, categoria.ordinal(), total);
+	            ticketDAO.insertarTicket(ticket);
 
 
-					
-	            
-
-				Tickets ticket=new Tickets(0,nombre,apellido,mail,cant,categoria,total);
-				ticketDAO.insertarTicket(ticket);
-	            dispatcher = request.getRequestDispatcher("vistas/conferencia.jsp");
+	        	    dispatcher = request.getRequestDispatcher("vistas/conferencia.jsp");
 	        }
 	        
 	        

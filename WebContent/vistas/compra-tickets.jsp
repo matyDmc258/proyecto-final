@@ -160,10 +160,10 @@
                     <div class="w-50 ps-1 ">
                         <p class="fs-5">Categoria</p>
                         <select class="form-select" aria-label="Default select example" id="selectDescuentos" name="categoria" required>
-                            <option value="80" >Estudiante</option>
-                            <option value="50" >Trainee</option>
-                            <option value="15" >Junior</option>
-                        </select>
+    					<option value="ESTUDIANTE">Estudiante</option>
+    					<option value="TRAINEE">Trainee</option>
+    					<option value="JUNIOR">Junior</option>
+						</select>
                     </div>
                 </div>
                 <div class="container-fluid">
